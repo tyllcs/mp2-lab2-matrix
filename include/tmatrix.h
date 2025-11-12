@@ -153,7 +153,7 @@ public:
         }
         return res;
     }
-    T operator*(const TDynamicVector& v) noexcept(noexcept(T()))
+    T operator*(const TDynamicVector& v) //noexcept(noexcept(T()))
     {
         if (sz != v.sz) throw - 1;
         T res = T();
@@ -197,7 +197,7 @@ public:
         for (size_t i = 0; i < sz; i++)
             pMem[i] = TDynamicVector<T>(sz);
     }
-
+    TDynamicMatrix(const TDynamicVector<TDynamicVector<T>>& v) : TDynamicVector<TDynamicVector<T>>(v) {}
     using TDynamicVector<TDynamicVector<T>>::operator[];
 
     // сравнение
@@ -232,19 +232,11 @@ public:
     // матрично-матричные операции
     TDynamicMatrix operator+(const TDynamicMatrix& m)
     {
-        if (sz != m.sz) throw - 1;
-        TDynamicMatrix tmp(sz);
-        for (size_t i = 0; i < sz; i++)
-            tmp.pMem[i] = pMem[i] + m.pMem[i];
-        return tmp;
+        return TDynamicVector<TDynamicVector<T>>::operator+(m);
     }
     TDynamicMatrix operator-(const TDynamicMatrix& m)
     {
-        if (sz != m.sz) throw - 1;
-        TDynamicMatrix tmp(sz);
-        for (size_t i = 0; i < sz; i++)
-            tmp.pMem[i] = pMem[i] - m.pMem[i];
-        return tmp;
+        return TDynamicVector<TDynamicVector<T>>::operator-(m);
     }
     TDynamicMatrix operator*(const TDynamicMatrix& m)
     {
