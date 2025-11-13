@@ -199,6 +199,25 @@ TEST(TDynamicMatrix, compare_equal_matrices_return_true)
 
 	EXPECT_EQ(src == src2, true);
 }
+TEST(TDynamicMatrix, compare_equal_matrices_return_false)
+{
+	TDynamicMatrix<int> src(2);
+	int cnt = 1;
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 2; j++) {
+			src[i][j] = cnt++;
+		}
+	}
+	cnt = 2;
+	TDynamicMatrix<int> src2(2);
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 2; j++) {
+			src2[i][j] = cnt++;
+		}
+	}
+
+	EXPECT_EQ(src == src2,false);
+}
 
 TEST(TDynamicMatrix, compare_matrix_with_itself_return_true)
 {
